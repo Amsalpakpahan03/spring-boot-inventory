@@ -3,31 +3,58 @@ package com.inventory.data.Model;
 import java.util.List;
 
 public class Nota {
+    private String id; // Jika pakai MongoDB atau auto-gen id
     private List<ItemNota> items;
-    private int total_harga;
+    private int totalHarga;
+    private String tanggal; // Format string, misal "2025-05-28"
+
+    public Nota() {
+    }
+
+    // Constructor lengkap dengan tanggal
+    public Nota(List<ItemNota> items, int totalHarga, String tanggal) {
+        this.items = items;
+        this.totalHarga = totalHarga;
+        this.tanggal = tanggal;
+    }
+
+    // Constructor tanpa tanggal (opsional)
+    public Nota(List<ItemNota> items, int totalHarga) {
+        this.items = items;
+        this.totalHarga = totalHarga;
+    }
+
+    // Getter dan Setter
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public List<ItemNota> getItems() {
-        return this.items;
+        return items;
     }
 
     public void setItems(List<ItemNota> items) {
         this.items = items;
     }
 
-    public int getTotal_harga() {
-        return this.total_harga;
+    public int getTotalHarga() {
+        return totalHarga;
     }
 
-    public void setTotal_harga(int total_harga) {
-        this.total_harga = total_harga;
+    public void setTotalHarga(int totalHarga) {
+        this.totalHarga = totalHarga;
     }
 
-    public Nota() {}
-
-    public Nota(List<ItemNota> items, int total_harga) {
-        this.items = items;
-        this.total_harga = total_harga;
+    public String getTanggal() {
+        return tanggal;
     }
 
-    // Getters dan Setters
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
+    }
 }

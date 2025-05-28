@@ -1,5 +1,6 @@
 package com.inventory.data.Controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inventory.data.Model.Barang;
 import com.inventory.data.Model.ItemNota;
 import com.inventory.data.Model.Nota;
+import com.inventory.data.Model.Riwayat;
 import com.inventory.data.Repository.BarangRepository;
 import com.inventory.data.Repository.NotaRepository;
+import com.inventory.data.Repository.RiwayatRepository;
 import com.inventory.data.dto.NotaRequest;
 
 @RestController
@@ -29,7 +32,10 @@ public class NotaController {
     @Autowired
     private NotaRepository notaRepository;
 
-    @PostMapping
+    @Autowired
+private RiwayatRepository riwayatRepository;
+
+@PostMapping
 public ResponseEntity<?> buatNota(@RequestBody NotaRequest request) {
     List<ItemNota> items = new ArrayList<>();
     int totalHarga = 0;
@@ -48,15 +54,18 @@ public ResponseEntity<?> buatNota(@RequestBody NotaRequest request) {
         int hargaTotal = barang.getHarga() * itemReq.getJumlah();
         items.add(new ItemNota(barang.getNama(), itemReq.getJumlah(), hargaTotal));
 
-        // Debug log sebelum simpan
-        System.out.println("Sebelum simpan stok barang " + barang.getNama() + ": " + barang.getJumlah() + " - kurangi: " + itemReq.getJumlah());
-
         // Kurangi stok
         barang.setJumlah(barang.getJumlah() - itemReq.getJumlah());
-        Barang savedBarang = barangRepository.save(barang);
+        barangRepository.save(barang);
 
-        // Debug log setelah simpan
-        System.out.println("Setelah simpan stok barang " + savedBarang.getNama() + ": " + savedBarang.getJumlah());
+        // Simpan riwayat keluar
+        Riwayat riwayat = new Riwayat();
+        riwayat.setNama_barang(barang.getNama());
+        riwayat.setJumlah(itemReq.getJumlah());
+        riwayat.setStatus("Keluar");
+        riwayat.setTanggal(LocalDate.now().toString());
+
+        riwayatRepository.save(riwayat);
 
         totalHarga += hargaTotal;
     }

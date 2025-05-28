@@ -11,6 +11,16 @@ public class Barang {
     private String nama;
     private int jumlah;
     private int harga;
+    private String kategori; // ← Tambahkan ini
+
+    public Barang() {}
+
+    public Barang(String nama, int jumlah, int harga, String kategori) {
+        this.nama = nama;
+        this.jumlah = jumlah;
+        this.harga = harga;
+        this.kategori = kategori;
+    }
 
     public String getId() {
         return this.id;
@@ -44,14 +54,11 @@ public class Barang {
         this.harga = harga;
     }
 
-
-    public Barang() {}
-
-    public Barang(String nama, int jumlah, int harga) {
-        this.nama = nama;
-        this.jumlah = jumlah;
-        this.harga = harga;
+    public String getKategori() {
+        return kategori;
     }
 
-    // Getters dan Setters
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
+    }
 }

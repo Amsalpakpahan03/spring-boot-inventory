@@ -1,42 +1,40 @@
 package com.inventory.data.Model;
 
 public class ItemNota {
-    private String nama_barang;
-    private int jumlah;
-    private int harga_total;
 
-    public String getNama_barang() {
-        return this.nama_barang;
+    private String namaBarang;
+    private int jumlah;
+    private int hargaTotal;
+
+    public ItemNota() {}
+
+    public ItemNota(String namaBarang, int jumlah, int hargaTotal) {
+        this.namaBarang = namaBarang;
+        this.jumlah = jumlah;
+        this.hargaTotal = hargaTotal;
     }
 
-    public void setNama_barang(String nama_barang) {
-        this.nama_barang = nama_barang;
+    public String getNamaBarang() {
+        return namaBarang;
+    }
+
+    public void setNamaBarang(String namaBarang) {
+        this.namaBarang = namaBarang;
     }
 
     public int getJumlah() {
-        return this.jumlah;
+        return jumlah;
     }
 
     public void setJumlah(int jumlah) {
         this.jumlah = jumlah;
     }
 
-    public int getHarga_total() {
-        return this.harga_total;
+    public int getHargaTotal() {
+        return hargaTotal;
     }
 
-    public void setHarga_total(int harga_total) {
-        this.harga_total = harga_total;
+    public void setHargaTotal(int hargaTotal) {
+        this.hargaTotal = hargaTotal;
     }
-
-
-    public ItemNota() {}
-
-    public ItemNota(String nama_barang, int jumlah, int harga_total) {
-        this.nama_barang = nama_barang;
-        this.jumlah = jumlah;
-        this.harga_total = harga_total;
-    }
-
-    // Getters dan Setters
 }
